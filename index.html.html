@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rohan Rondia | Cloud DevOps Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0c10;
+    --bg2: #111318;
+    --bg3: #171a21;
+    --accent: #00e5a0;
+    --accent2: #00b87a;
+    --text: #e8eaf0;
+    --muted: #7a7f8e;
+    --border: rgba(255,255,255,0.07);
+    --card: #13161d;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Syne', sans-serif; font-size: 16px; line-height: 1.7;
+    overflow-x: hidden;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 6%; background: rgba(10,12,16,0.88);
+    backdrop-filter: blur(14px); border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 7rem 6% 4rem; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; width: 100%; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,229,160,0.08); border: 1px solid rgba(0,229,160,0.25); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.72rem; padding: 6px 14px; border-radius: 2px; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-name { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .hero-name span { color: var(--accent); }
+  .hero-role { font-family: 'Space Mono', monospace; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.12em; margin-bottom: 1.5rem; text-transform: uppercase; }
+  .hero-desc { color: var(--muted); font-size: 0.96rem; max-width: 460px; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { display: inline-block; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.75rem 1.6rem; border-radius: 2px; transition: all 0.2s; cursor: pointer; border: none; }
+  .btn-primary { background: var(--accent); color: #020a06; border: 1px solid var(--accent); }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-visual { display: flex; align-items: center; justify-content: center; }
+  .avatar-wrap { position: relative; width: 300px; height: 300px; }
+  .avatar-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(0,229,160,0.2); animation: spin 12s linear infinite; }
+  .avatar-ring::before { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .avatar-inner { position: absolute; inset: 20px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .avatar-initials { font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--accent); }
+  section { padding: 6rem 6%; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.01em; }
+  .section-line { width: 48px; height: 2px; background: var(--accent); margin-bottom: 3rem; }
+  #about { background: var(--bg2); }
+  .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
+  .about-meta { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .about-meta-item { font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .about-meta-item span:first-child { color: var(--accent); }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem; text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); font-family: 'Space Mono', monospace; }
+  .stat-label { color: var(--muted); font-size: 0.78rem; margin-top: 4px; }
+  #experience { background: var(--bg); }
+  .exp-timeline { position: relative; padding-left: 2rem; }
+  .exp-timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--border); }
+  .exp-item { position: relative; margin-bottom: 3rem; }
+  .exp-dot { position: absolute; left: -2.4rem; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+  .exp-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .exp-role { font-size: 1.1rem; font-weight: 700; }
+  .exp-company { color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.82rem; }
+  .exp-period { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); padding: 2px 10px; border-radius: 2px; }
+  .exp-location { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+  .exp-bullets { list-style: none; margin-top: 0.75rem; }
+  .exp-bullets li { color: var(--muted); font-size: 0.9rem; padding: 0.3rem 0 0.3rem 1.3rem; position: relative; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
+  .exp-project { margin-top: 1.2rem; background: var(--card); border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: 0 4px 4px 0; padding: 1rem 1.2rem; }
+  .exp-project-title { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  #projects { background: var(--bg2); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.75rem; transition: border-color 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+  .project-card:hover { border-color: rgba(0,229,160,0.35); transform: translateY(-3px); }
+  .project-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .project-icon { width: 42px; height: 42px; border-radius: 4px; background: rgba(0,229,160,0.08); border: 1px solid rgba(0,229,160,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .project-links { display: flex; gap: 0.5rem; }
+  .project-link { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; transition: all 0.2s; }
+  .project-link:hover { color: var(--accent); border-color: rgba(0,229,160,0.4); }
+  .project-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-desc { color: var(--muted); font-size: 0.87rem; margin-bottom: 1.2rem; flex: 1; }
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tech-tag { font-family: 'Space Mono', monospace; font-size: 0.66rem; color: var(--accent); background: rgba(0,229,160,0.07); border: 1px solid rgba(0,229,160,0.18); padding: 3px 9px; border-radius: 2px; }
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+  .skill-group { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem; }
+  .skill-group-title { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.9rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--border); }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .skill-pill { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text); font-size: 0.8rem; padding: 4px 11px; border-radius: 2px; transition: border-color 0.2s; }
+  .skill-pill:hover { border-color: rgba(0,229,160,0.3); }
+  #education { background: var(--bg2); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.2rem; margin-bottom: 3rem; }
+  .edu-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; transition: border-color 0.2s; }
+  .edu-card:hover { border-color: rgba(0,229,160,0.25); }
+  .edu-year { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .edu-degree { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .edu-school { color: var(--muted); font-size: 0.83rem; }
+  .certs-grid { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1rem; }
+  .cert-pill { background: rgba(0,229,160,0.06); border: 1px solid rgba(0,229,160,0.2); color: var(--text); font-size: 0.8rem; font-family: 'Space Mono', monospace; padding: 8px 16px; border-radius: 2px; }
+  #contact { background: var(--bg); }
+  .contact-wrap { max-width: 620px; margin: 0 auto; text-align: center; }
+  .contact-intro { color: var(--muted); margin-bottom: 2.5rem; }
+  .contact-form { text-align: left; }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-label { display: block; font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem; }
+  .form-input, .form-textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); font-family: 'Syne', sans-serif; font-size: 0.93rem; padding: 0.75rem 1rem; border-radius: 2px; outline: none; transition: border-color 0.2s; }
+  .form-input:focus, .form-textarea:focus { border-color: rgba(0,229,160,0.5); }
+  .form-textarea { height: 120px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .social-links { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+  .social-link { font-family: 'Space Mono', monospace; font-size: 0.73rem; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 8px 18px; border-radius: 2px; transition: all 0.2s; }
+  .social-link:hover { color: var(--accent); border-color: rgba(0,229,160,0.4); }
+  footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem 6%; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  footer span { color: var(--accent); }
+  body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-image: linear-gradient(rgba(0,229,160,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.02) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero-visual { display: none; }
+    .hero-desc { max-width: 100%; }
+    .hero-btns { justify-content: center; }
+    .about-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    nav { padding: 1rem 4%; }
+    .nav-links { gap: 1rem; }
+    section { padding: 4rem 5%; }
+    .exp-timeline { padding-left: 1.5rem; }
+    .exp-dot { left: -2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">RR<span style="color:var(--muted)">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-content fade-in">
+      <div class="hero-tag">Open to new opportunities</div>
+      <h1 class="hero-name">Rohan<br/><span>Rondia</span></h1>
+      <p class="hero-role">// Cloud Engineer &amp; DevOps Specialist</p>
+      <p class="hero-desc">Cloud and IT professional with hands-on experience deploying and managing infrastructure on AWS and Azure. I build scalable, secure, and highly available cloud solutions — from code to cloud.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-in" style="transition-delay:0.2s">
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <div class="avatar-inner">
+          <!-- Replace with your photo: <img src="photo.jpg" alt="Rohan Rondia" style="width:100%;height:100%;object-fit:cover;"/> -->
+          <div class="avatar-initials">RR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">01 / About</p>
+    <h2 class="section-title fade-in">Who I Am</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>Hi, I'm <strong style="color:var(--text)">Rohan Rondia</strong>, a Cloud Engineer and DevOps specialist based in Kitchener, Ontario. I have hands-on experience deploying and managing cloud infrastructure on <strong style="color:var(--accent)">AWS and Azure</strong>, with a background that spans enterprise IT, cloud migration, and automation.</p>
+        <p>I specialize in <strong style="color:var(--accent)">Infrastructure as Code</strong> with Terraform and Ansible, CI/CD pipeline automation, and enterprise system support — helping teams move faster, deploy safer, and scale smarter.</p>
+        <p>Strong communicator with a client-focused approach and proven ability to thrive in fast-paced, agile environments. Continuously learning emerging cloud-native technologies.</p>
+        <div class="about-meta">
+          <div class="about-meta-item"><span>→</span> rohanrondia45@gmail.com</div>
+          <div class="about-meta-item"><span>→</span> +1 (548) 577-6228</div>
+          <div class="about-meta-item"><span>→</span> Kitchener, ON, Canada</div>
+        </div>
+      </div>
+      <div class="stats-grid fade-in" style="transition-delay:0.15s">
+        <div class="stat-card">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">AWS</div>
+          <div class="stat-label">Primary Cloud</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Degrees &amp; PG Certs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">IaC</div>
+          <div class="stat-label">Terraform &amp; Ansible</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">02 / Experience</p>
+    <h2 class="section-title fade-in">Where I've Worked</h2>
+    <div class="section-line"></div>
+    <div class="exp-timeline">
+      <div class="exp-item fade-in">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <span class="exp-role">System Engineer</span>
+          <span class="exp-company">Infosys Ltd.</span>
+          <span class="exp-period">Sept 2021 – Mar 2023</span>
+          <span class="exp-location">Bangalore, India</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Deployed and managed cloud infrastructure on AWS including EC2, S3, RDS, VPC, and IAM, supporting highly available and fault-tolerant application environments.</li>
+          <li>Applied cloud governance policies and compliance best practices to ensure infrastructure met security and operational standards.</li>
+          <li>Implemented monitoring and alerting solutions using AWS CloudWatch and Zabbix to proactively identify performance issues and maintain peak availability.</li>
+          <li>Automated infrastructure processes using PowerShell and Bash scripts, improving operational efficiency and reducing manual intervention.</li>
+          <li>Collaborated with DevOps and engineering teams in an Agile environment to resolve incidents, execute change requests, and maintain service continuity.</li>
+          <li>Assisted in translating architectural designs into working cloud solutions and contributed to proof-of-concept implementations under senior guidance.</li>
+          <li>Documented technical procedures, runbooks, and troubleshooting guides to support knowledge transfer and ongoing operations.</li>
+        </ul>
+        <div class="exp-project">
+          <div class="exp-project-title">Key Project — Dow Jones Cloud Migration</div>
+          <ul class="exp-bullets" style="margin-top:0">
+            <li>Supported migration of on-premises infrastructure to AWS, executing deployments following established architectural patterns and best practices.</li>
+            <li>Assisted in implementing CI/CD automation pipelines and monitoring systems to maintain secure, scalable, and resilient cloud environments.</li>
+            <li>Collaborated with cross-functional DevOps and client teams to ensure smooth adoption of cloud services and timely project delivery.</li>
+            <li>Contributed to disaster recovery planning and data backup strategies to ensure business continuity post-migration.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label">03 / Projects</p>
+    <h2 class="section-title fade-in">What I've Built</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-top">
+          <div class="project-icon">☁️</div>
+          <div class="project-links">
+            <a href="https://github.com/Rohan927" class="project-link" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <h3 class="project-title">Dow Jones Cloud Migration</h3>
+        <p class="project-desc">Supported migration of on-premises infrastructure to AWS at Infosys for Dow Jones. Set up EC2, S3, VPC, IAM, CI/CD pipelines, and disaster recovery strategies for a major media enterprise.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">AWS EC2</span><span class="tech-tag">S3</span><span class="tech-tag">VPC</span><span class="tech-tag">IAM</span><span class="tech-tag">CI/CD</span><span class="tech-tag">DR Planning</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" style="transition-delay:0.1s">
+        <div class="project-top">
+          <div class="project-icon">⚙️</div>
+          <div class="project-links">
+            <a href="https://github.com/Rohan927" class="project-link" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <h3 class="project-title">AWS Infrastructure Automation (IaC)</h3>
+        <p class="project-desc">Designed and deployed automated AWS infrastructure using Terraform and Ansible. Provisioned EC2, S3, RDS, and VPC resources in a repeatable, scalable, and version-controlled manner.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Terraform</span><span class="tech-tag">Ansible</span><span class="tech-tag">AWS</span><span class="tech-tag">IaC</span><span class="tech-tag">Python</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" style="transition-delay:0.2s">
+        <div class="project-top">
+          <div class="project-icon">📊</div>
+          <div class="project-links">
+            <a href="https://github.com/Rohan927" class="project-link" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <h3 class="project-title">Cloud Monitoring &amp; Alerting Stack</h3>
+        <p class="project-desc">Built a full observability solution integrating AWS CloudWatch and Zabbix to monitor infrastructure metrics, set automated alerts, and enable proactive incident response across enterprise environments.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">CloudWatch</span><span class="tech-tag">Zabbix</span><span class="tech-tag">AWS</span><span class="tech-tag">Bash</span><span class="tech-tag">PowerShell</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" style="transition-delay:0.3s">
+        <div class="project-top">
+          <div class="project-icon">🐳</div>
+          <div class="project-links">
+            <a href="https://github.com/Rohan927" class="project-link" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <h3 class="project-title">CI/CD Pipeline with Docker &amp; GitHub Actions</h3>
+        <p class="project-desc">Designed a containerized CI/CD pipeline automating build, test, and deployment stages using Docker and GitHub Actions, improving delivery speed and eliminating manual deployment errors.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Docker</span><span class="tech-tag">GitHub Actions</span><span class="tech-tag">Python</span><span class="tech-tag">Bash</span><span class="tech-tag">Linux</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">04 / Skills</p>
+    <h2 class="section-title fade-in">My Toolkit</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Cloud Platforms</div>
+        <div class="skill-list">
+          <span class="skill-pill">AWS EC2</span><span class="skill-pill">AWS S3</span><span class="skill-pill">AWS RDS</span><span class="skill-pill">AWS VPC</span><span class="skill-pill">AWS IAM</span><span class="skill-pill">CloudWatch</span><span class="skill-pill">Azure (AZ-900)</span><span class="skill-pill">GCP Fundamentals</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in" style="transition-delay:0.08s">
+        <div class="skill-group-title">Infrastructure as Code</div>
+        <div class="skill-list">
+          <span class="skill-pill">Terraform</span><span class="skill-pill">Ansible</span><span class="skill-pill">CI/CD Pipelines</span><span class="skill-pill">GitOps</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in" style="transition-delay:0.16s">
+        <div class="skill-group-title">Containers &amp; DevOps</div>
+        <div class="skill-list">
+          <span class="skill-pill">Docker</span><span class="skill-pill">Git / GitHub</span><span class="skill-pill">GitHub Actions</span><span class="skill-pill">Agile / Scrum</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in" style="transition-delay:0.24s">
+        <div class="skill-group-title">Scripting &amp; Languages</div>
+        <div class="skill-list">
+          <span class="skill-pill">Python</span><span class="skill-pill">Bash</span><span class="skill-pill">PowerShell</span><span class="skill-pill">YAML</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in" style="transition-delay:0.32s">
+        <div class="skill-group-title">Monitoring &amp; Observability</div>
+        <div class="skill-list">
+          <span class="skill-pill">AWS CloudWatch</span><span class="skill-pill">Zabbix</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in" style="transition-delay:0.4s">
+        <div class="skill-group-title">Networking &amp; OS</div>
+        <div class="skill-list">
+          <span class="skill-pill">TCP/IP</span><span class="skill-pill">DNS / DHCP</span><span class="skill-pill">VPN</span><span class="skill-pill">Linux (Ubuntu, CentOS)</span><span class="skill-pill">Windows Server</span><span class="skill-pill">Active Directory</span><span class="skill-pill">Microsoft 365</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label">05 / Education</p>
+    <h2 class="section-title fade-in">Academic Background</h2>
+    <div class="section-line"></div>
+    <div class="edu-grid">
+      <div class="edu-card fade-in">
+        <div class="edu-year">2025</div>
+        <div class="edu-degree">PG Certificate — Cloud DevOps</div>
+        <div class="edu-school">York University</div>
+      </div>
+      <div class="edu-card fade-in" style="transition-delay:0.1s">
+        <div class="edu-year">2024</div>
+        <div class="edu-degree">PG Certificate — Virtualization &amp; Cloud Computing</div>
+        <div class="edu-school">Conestoga College</div>
+      </div>
+      <div class="edu-card fade-in" style="transition-delay:0.2s">
+        <div class="edu-year">2021</div>
+        <div class="edu-degree">B.Tech — Information Technology</div>
+        <div class="edu-school">Guru Gobind Singh Indraprastha University</div>
+      </div>
+    </div>
+    <h3 class="fade-in" style="font-size:0.85rem; font-family:'Space Mono',monospace; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem;">Certifications</h3>
+    <div class="certs-grid fade-in" style="transition-delay:0.1s">
+      <div class="cert-pill">Microsoft Azure Fundamentals (AZ-900)</div>
+      <div class="cert-pill">Microsoft 365 Fundamentals (MS-900)</div>
+      <div class="cert-pill">AWS — Continuous Learning</div>
+      <div class="cert-pill">Terraform — Continuous Learning</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">06 / Contact</p>
+    <h2 class="section-title fade-in" style="text-align:center">Let's Build Together</h2>
+    <div class="section-line" style="margin:0 auto 3rem;"></div>
+    <div class="contact-wrap fade-in">
+      <p class="contact-intro">Open to new Cloud &amp; DevOps opportunities, collaborations, and interesting infrastructure challenges. Drop me a message — I'll get back to you fast.</p>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-input" placeholder="Your Name" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="your@email.com" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input type="text" class="form-input" placeholder="What's this about?"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about your opportunity or project..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; font-size:0.82rem;">Send Message →</button>
+      </form>
+      <div class="social-links">
+        <a href="https://github.com/Rohan927" class="social-link" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/rondiarohan98/" class="social-link" target="_blank">LinkedIn</a>
+        <a href="mailto:rohanrondia45@gmail.com" class="social-link">Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with 💻 + ☕ &nbsp;·&nbsp; © 2025 <span>Rohan Rondia</span> &nbsp;·&nbsp; All Rights Reserved</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = 'var(--accent2)';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; e.target.reset(); }, 3000);
+  }
+</script>
+</body>
+</html>
